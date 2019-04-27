@@ -12,6 +12,14 @@ import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
 
+import kaaes.spotify.webapi.android.SpotifyApi;
+import kaaes.spotify.webapi.android.SpotifyCallback;
+import kaaes.spotify.webapi.android.SpotifyError;
+import kaaes.spotify.webapi.android.SpotifyService;
+import kaaes.spotify.webapi.android.models.Pager;
+import kaaes.spotify.webapi.android.models.PlaylistSimple;
+import retrofit.client.Response;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String CLIENT_ID = "2728f152d53b42f1a29e3a967f34a02f";
@@ -32,9 +40,26 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        Log.d("MainActivity", "Todo");
+        SpotifyApi api = new SpotifyApi();
+        api.setAccessToken(mAccessToken);
+        SpotifyService spotify = api.getService();
 
-        // Todo call playlistapi
+        spotify.getMyPlaylists(new SpotifyCallback<Pager<PlaylistSimple>>() {
+            @Override
+            public void failure(SpotifyError spotifyError) {
+                // handle error
+                Log.e("MainActivity", "Error: getMyPlaylists ...");
+            }
+
+            @Override
+            public void success(Pager<PlaylistSimple> playlistSimplePager, Response response) {
+                // do something
+                // for example
+                for(PlaylistSimple playlistSimple: playlistSimplePager.items) {
+                    Log.d("playlist:", playlistSimple.name);
+                }
+            }
+        });
     }
 
     public void onRequestTokenClicked(View view) {
