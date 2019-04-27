@@ -20,6 +20,8 @@
     under the License.
 -->
 <resources>
+
+    <!-- if you want to change your redirect uri, edit the two following lines accordingly -->
     <string name="com_spotify_sdk_redirect_scheme">spotifyplaylists</string>
     <string name="com_spotify_sdk_redirect_host">callback</string>
 </resources>

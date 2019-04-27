@@ -28,7 +28,24 @@ import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Instructions:
+    // 1. open https://developer.spotify.com/dashboard/
+    // 2. select your application or create a new one
+    // 3. copy the client id and replace the one below
+    // 4. click on "edit settings" and add the following redirect URI:
+    //      spotifyplaylists://callback
+    // 5. add the "Android Packages" information in the "edit settings" menu (same as 4.)
+    // 5.1 add the android package name: com.example.spotifyplaylists
+    // 5.2 open the terminal tab in android studio and pase+run the following command :
+    //      keytool -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore
+    // (default password is android)
+    // 6. press on "save" in the "edit settings" popup and try if it works
+
+
+    // change this and add your client ID here
     public static final String CLIENT_ID = "2728f152d53b42f1a29e3a967f34a02f";
+
+    // this is how your redirect URI should look like in the spotify dev dashboard
     public static final String REDIRECT_URI = "spotifyplaylists://callback";
     public static final int AUTH_TOKEN_REQUEST_CODE = 2019;
 
